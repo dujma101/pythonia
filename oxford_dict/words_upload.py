@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def upload_words(rijeci_raw):
 
     koliko1 = len(rijeci_raw)
-    url = "http://www.memrise.com/course/1404214/advanced-english/edit/#l_5348207"
+    url = "https://www.memrise.com/course/1417154/intermediate-english-with-audio/edit/#l_5393587"
     url1 = 'http://www.memrise.com/course/1401947/pandas/edit/#l_5337085'
     fp = webdriver.FirefoxProfile('C:/Users/jjjjj/AppData/Roaming/Mozilla/Firefox/Profiles/47nscnxi.default')
 

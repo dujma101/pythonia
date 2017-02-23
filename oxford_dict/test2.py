@@ -14,7 +14,7 @@ empty = bytes('', 'utf-8')
 
 class MerriamWebsterAPI:
     def __init__(self, key):
-        self.key = '============'
+        self.key = 'b90ca8c7-b0cb-44c4-bc1b-06cb655d0301'
         self.cachedXML = {}
 
     def _wrap_url(self, url):
@@ -34,7 +34,7 @@ class MerriamWebsterAPI:
     def _get_xml_root(self, xml):
         root = ET.fromstring(xml)
         # print(root)
-        first_entry = root.findall('entry')[:3]
+        first_entry = root.findall('entry')
         rutovi = []
         for root in first_entry:
             rutovi.append(root)
@@ -47,33 +47,63 @@ class DictionaryAPI(MerriamWebsterAPI):
     base_url = 'http://www.dictionaryapi.com/api/v1/references/collegiate/xml/'
 
 
-    def _parse_xml_for_def(self, xml):
+    def _parse_xml_for_def(self, xml,word):
+        print(word)
         main_entry = self._get_xml_root(xml)
-        defspojeno = []
+
+
+        # for root in first_entry:
+        #    if len(root.attrib['id']) < len(word) + 3:
+        #        print('korijen',root.attrib['id'])
+        #        rutovi.append(root)
         usage1 = []
+        defspojeno = []
+
+        long = 0
+        znakovi = ['\u24f5','\u24f6','\u24f7','\u24f8','\u24f9']
+        count = 0
+        newcount = 0
         for mali in main_entry:
-            deftag = mali.findall('.//def/dt')
-            long = 0
-            for defin in deftag:
-                long +=len(defin.text)
-                if type(defin.text) == str and 300>long and len(defin.text)>20:
-                    defspojeno.append(defin.text.replace(':',''))
-            if long<10:
-                nizi = mali.findall('.//def/dt/sx')
-                for nizi in nizi:
-                    defspojeno.append(nizi.text.replace(':',''))
-            usage = mali.findall('.//def/dt/vi')
-            for primjer in usage:
-                usage1.append(primjer.text)
-        primjerspojeno = '  \u25c9 '.join(usage1[:3])
-        sdefspojeno = '  \u235f '.join(defspojeno)
-        oba_spojeno = sdefspojeno + ' \u21f6Usage: ' + primjerspojeno
+            if len(mali.attrib['id']) < len(word) + 4:
+                # print(mali.attrib['id'])
+                duzina1 = 0
+
+                count = count+1
+                # print(count)
+                deftag = mali.findall('.//def/dt')
+                # print(deftag)
+                # print('222222222222222222')
+                # print(deftag)
+                for defin in deftag:
+                    # print('prvi             ',defin.text)
+                    long +=len(defin.text)
+                    duzina1 +=len(defin.text)
+                    # print(duzina1)
+                    # print(len(defin.text))
+                    # print(long)
+                    if type(defin.text) == str  and duzina1 <200 and len(defin.text)>20:
+                        if count > newcount:
+                            newcount +=1
+                            defspojeno.append(' ' + znakovi[count-1])
+                        defspojeno.append('\u25b6 ' + defin.text.replace(':',''))
+                if long<10:
+                    nizi = mali.findall('.//def/dt/sx')
+                    for nizi in nizi:
+                        defspojeno.append(nizi.text.replace(':',''))
+                usage = mali.findall('.//def/dt/vi')
+                for primjer in usage:
+                    usage1.append(primjer.text)
+        sdefspojeno = ' '.join(defspojeno)
+        # print(defspojeno)
+        # print(sdefspojeno)
+        primjerspojeno = '  \u25b6 '.join(usage1[:3])
+        oba_spojeno = sdefspojeno + ' \u23fa\u23e9 Usage: ' + primjerspojeno
         return oba_spojeno
 
 
     def get_definition(self, word):
         result = self._retrieve_xml(word)
-        definition = self._parse_xml_for_def(result).replace(word,'\u204e'*len(word))
+        definition = self._parse_xml_for_def(result,word).replace(word,'\u204e'*len(word))
         print('definition',definition)
         return definition
 
@@ -150,12 +180,12 @@ rijeci_raw = b.split()
 
 class MWApiException(Exception):
     pass
-problem = ['unduly']
-a.process(rijeci_raw)
+problem = ['strain']
+a.process(problem)
 #
-upload_words(rijeci_raw)
-# #
-to_mp3(rijeci_raw)
-
-
-
+# upload_words(rijeci_raw)
+# # #
+# to_mp3(rijeci_raw)
+#
+#
+#

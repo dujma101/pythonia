@@ -62,7 +62,8 @@ def to_mp3(rijeci_raw):
         print('ovo je a'+ sve)
         with zipfile.ZipFile(sve, "r") as z:
             z.extractall("C:\\Users\\jjjjj\\Desktop\\pythonia\\oxford_dict\\rijeci_sound\\zip\\")
-        # os.remove(sve)
+        time.sleep(2)
+        os.remove(sve)
    # driver.close()
 
 
@@ -70,7 +71,7 @@ def to_mp3(rijeci_raw):
 
     #populating mp3 to memrise--------------------------
 
-    url = "http://www.memrise.com/course/1404214/advanced-english/edit/#l_5348207"
+    url = "https://www.memrise.com/course/1417154/intermediate-english-with-audio/edit/#l_5393587"
     url1 = 'http://www.memrise.com/course/1401947/pandas/edit/#l_5337085'
     fp1 = webdriver.FirefoxProfile('C:/Users/jjjjj/AppData/Roaming/Mozilla/Firefox/Profiles/47nscnxi.default')
 
