@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1864080373">
+    <data-source source="LOCAL" name="SQLite -words" uuid="72290cff-877f-4acc-a40d-9823a21657d6">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/oxford_dict/word_database/words.db</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
