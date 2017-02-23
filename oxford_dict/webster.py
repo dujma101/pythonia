@@ -14,7 +14,7 @@ empty = bytes('', 'utf-8')
 
 class MerriamWebsterAPI:
     def __init__(self, key):
-        self.key = 'b90ca8c7-b0cb-44c4-bc1b-06cb655d0301'
+        self.key = '============'
         self.cachedXML = {}
 
     def _wrap_url(self, url):
