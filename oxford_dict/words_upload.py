@@ -4,10 +4,12 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
+
 def upload_words(rijeci_raw):
 
-    koliko1 = len(rijeci_raw)
-    url = "https://www.memrise.com/course/1417154/intermediate-english-with-audio/edit/#l_5393587"
+    koliko1 =len(rijeci_raw)
+    url = "https://www.memrise.com/course/1420571/english/edit/#l_5406563"
     url1 = 'http://www.memrise.com/course/1401947/pandas/edit/#l_5337085'
     fp = webdriver.FirefoxProfile('C:/Users/jjjjj/AppData/Roaming/Mozilla/Firefox/Profiles/47nscnxi.default')
 
@@ -33,17 +35,17 @@ def upload_words(rijeci_raw):
 
     conn = sqlite3.connect('.\\word_database\\words.db')
 
-    cursor = conn.execute("select word, definition, etymology FROM words ORDER BY ROWID DESC LIMIT {}".format(koliko1))
+    cursor = conn.execute("select * FROM words ORDER BY ROWID DESC LIMIT {}".format(koliko1))
     for sve in cursor:
         print(sve)
         # elem.send_keys(str(row))
 
 
 
-        elem.send_keys(sve[0] + '\t')
-        elem.send_keys(sve[1] +'\t')
-        elem.send_keys(sve[2] + '\n')
-
+        elem.send_keys(sve[1] + '\t')
+        elem.send_keys(sve[2] +'\t')
+        elem.send_keys(sve[3] + '\t')
+        elem.send_keys(sve[4] + '\n')
     conn.close()
 
     driver.find_element_by_css_selector(".btn-primary").click()

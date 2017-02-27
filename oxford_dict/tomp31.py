@@ -43,18 +43,17 @@ def to_mp3(rijeci_raw):
 
     driver.find_element_by_css_selector("div.button_1_inner_1:nth-child(1) > div:nth-child(1)").click()
 
-    # time.sleep(5)
+    time.sleep(2)
+    driver.execute_script("window.scrollTo(0, 0);")
+    time.sleep(1)
     wait.until(EC.frame_to_be_available_and_switch_to_it('download_iframe'))
 
-    # driver.switch_to.frame("download_iframe")
-    time.sleep(2)
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(1)
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#download_file_link')))
 
     driver.find_element_by_css_selector("#download_file_link").click()
 
-    time.sleep(5)
+    time.sleep(3)
 
     a = glob.glob('C:\\Users\\jjjjj\\Downloads\\*mp3*.zip')
 
@@ -64,14 +63,14 @@ def to_mp3(rijeci_raw):
             z.extractall("C:\\Users\\jjjjj\\Desktop\\pythonia\\oxford_dict\\rijeci_sound\\zip\\")
         time.sleep(2)
         os.remove(sve)
-   # driver.close()
+    driver.close()
 
 
 
 
     #populating mp3 to memrise--------------------------
 
-    url = "https://www.memrise.com/course/1417154/intermediate-english-with-audio/edit/#l_5393587"
+    url = "https://www.memrise.com/course/1420571/english/edit/#l_5406563"
     url1 = 'http://www.memrise.com/course/1401947/pandas/edit/#l_5337085'
     fp1 = webdriver.FirefoxProfile('C:/Users/jjjjj/AppData/Roaming/Mozilla/Firefox/Profiles/47nscnxi.default')
 
@@ -97,14 +96,14 @@ def to_mp3(rijeci_raw):
     zipano = zip(elem, dajvise)
     #
     print(str(zipano))
-
+    time.sleep(2)
     for eleme,rijeci in zipano:
         print(eleme,rijeci)
         eleme.send_keys("C:\\Users\\jjjjj\\Desktop\\pythonia\\oxford_dict\\rijeci_sound\\zip\\" + (rijeci[0][:-3] + 'mp3'))
-        time.sleep(2)
+        time.sleep(1)
 
     driver.close()
 
-
+#to_mp3()
 #
 #
